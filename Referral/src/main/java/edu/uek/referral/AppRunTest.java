@@ -9,9 +9,9 @@ public class AppRunTest {
 
     public static void main(String[] args) {
 
-        RepositoryManager repo = new RepositoryManager();
+        /*RepositoryManager repo = new RepositoryManager();
 
-        repo.getConnection();
+        repo.getConnection();*/
 
     }
 

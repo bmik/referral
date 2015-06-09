@@ -1,5 +1,7 @@
 package edu.uek.referral.model.entity;
 
+import edu.uek.referral.api.ReferralStatus;
+
 import java.util.Date;
 
 /**
@@ -13,6 +15,7 @@ public class Referral {
     private Date createDate;
     private Date examinationDate;
     private Examination examintation;
+    private ReferralStatus status;
 
     public long getId() {
         return id;
@@ -60,5 +63,13 @@ public class Referral {
 
     public void setExamintation(Examination examintation) {
         this.examintation = examintation;
+    }
+
+    public ReferralStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReferralStatus status) {
+        this.status = status;
     }
 }

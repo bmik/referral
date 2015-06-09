@@ -12,15 +12,27 @@ import java.util.logging.Logger;
  */
 public class RepositoryManager {
 
+    private static RepositoryManager manager;
+
     private static final String PROPERTY_FILE = "config.properties";
     private static final String DB_DRIVER_CLASS = "org.postgresql.Driver";
     private static final String DB_URL_PREFIX = "jdbc:postgresql://";
 
     private static final Logger logger = Logger.getLogger(RepositoryManager.class.getName());
 
-    public void getConnection() {
+    private RepositoryManager() {}
 
-        Connection connection;
+    public static RepositoryManager getInstance() {
+        if (manager == null) {
+            manager = new RepositoryManager();
+        }
+
+        return manager;
+    }
+
+    public Connection getConnection() {
+
+        Connection connection = null;
         Properties properties = new Properties();
 
         logger.info("Attempting to connect DataSource...");
@@ -52,6 +64,8 @@ public class RepositoryManager {
         }
 
         logger.info("DataSource connected!");
+
+        return connection;
 
     }
 
