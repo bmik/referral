@@ -2,10 +2,12 @@ package edu.uek.referral.api.response;
 
 import edu.uek.referral.api.ResponseStatus;
 
+import java.io.Serializable;
+
 /**
  * Created by bmik on 2015-06-06.
  */
-public class BasicResponse {
+public class BaseResponse {
 
     private ResponseStatus status;
     private String cause;

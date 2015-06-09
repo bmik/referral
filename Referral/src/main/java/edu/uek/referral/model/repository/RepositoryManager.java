@@ -1,5 +1,7 @@
 package edu.uek.referral.model.repository;
 
+import edu.uek.referral.logic.util.PropertyHandler;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +16,6 @@ public class RepositoryManager {
 
     private static RepositoryManager manager;
 
-    private static final String PROPERTY_FILE = "config.properties";
     private static final String DB_DRIVER_CLASS = "org.postgresql.Driver";
     private static final String DB_URL_PREFIX = "jdbc:postgresql://";
 
@@ -33,17 +34,15 @@ public class RepositoryManager {
     public Connection getConnection() {
 
         Connection connection = null;
-        Properties properties = new Properties();
 
         logger.info("Attempting to connect DataSource...");
 
         try {
-            properties.load(getClass().getClassLoader().getResourceAsStream(PROPERTY_FILE));
-            String dbUser = properties.getProperty("db.user");
-            String dbPass = properties.getProperty("db.pass");
-            String dbHost = properties.getProperty("db.host");
-            String dbPort = properties.getProperty("db.port");
-            String dbName = properties.getProperty("db.name");
+            String dbUser = PropertyHandler.getProperty("db.user");
+            String dbPass = PropertyHandler.getProperty("db.pass");
+            String dbHost = PropertyHandler.getProperty("db.host");
+            String dbPort = PropertyHandler.getProperty("db.port");
+            String dbName = PropertyHandler.getProperty("db.name");
 
             Class.forName(DB_DRIVER_CLASS);
 
@@ -55,8 +54,6 @@ public class RepositoryManager {
 
             connection = DriverManager.getConnection(dbUrl, dbUser, dbPass);
 
-        } catch (IOException e) {
-            logger.info("DataSource connection failed - " + e.getStackTrace());
         } catch (ClassNotFoundException e) {
             logger.info("DataSource connection failed - " + e.getStackTrace());
         } catch (SQLException e) {

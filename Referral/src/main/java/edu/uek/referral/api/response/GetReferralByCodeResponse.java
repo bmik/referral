@@ -1,15 +1,15 @@
-package edu.uek.referral.api.request;
+package edu.uek.referral.api.response;
 
 import edu.uek.referral.model.entity.Referral;
 
 import java.io.Serializable;
 
 /**
- * Created by bmik on 2015-06-06.
+ * Created by ahmed on 09.06.15.
  */
-public class AddNewReferralRequest extends BaseRequest implements Serializable {
+public class GetReferralByCodeResponse extends BaseResponse implements Serializable {
 
-    private static final long serialVersionUID = -480540358927975878L;
+    private static final long serialVersionUID = 4134098161518175423L;
 
     private Referral referral;
 

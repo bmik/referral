@@ -2,19 +2,23 @@ package edu.uek.referral.model.entity;
 
 import edu.uek.referral.api.ReferralStatus;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by bmik on 2015-06-02.
  */
-public class Referral {
+public class Referral implements Serializable {
+
+    private static final long serialVersionUID = 2745867997314062601L;
 
     private long id;
     private long clientId;
     private String referralCode;
     private Date createDate;
     private Date examinationDate;
-    private Examination examintation;
+    private Examination examination;
+    private ExaminationResult examinationResult;
     private ReferralStatus status;
 
     public long getId() {
@@ -57,12 +61,12 @@ public class Referral {
         this.examinationDate = examinationDate;
     }
 
-    public Examination getExamintation() {
-        return examintation;
+    public Examination getExamination() {
+        return examination;
     }
 
-    public void setExamintation(Examination examintation) {
-        this.examintation = examintation;
+    public void setExamination(Examination examination) {
+        this.examination = examination;
     }
 
     public ReferralStatus getStatus() {
@@ -71,5 +75,13 @@ public class Referral {
 
     public void setStatus(ReferralStatus status) {
         this.status = status;
+    }
+
+    public ExaminationResult getExaminationResult() {
+        return examinationResult;
+    }
+
+    public void setExaminationResult(ExaminationResult examinationResult) {
+        this.examinationResult = examinationResult;
     }
 }

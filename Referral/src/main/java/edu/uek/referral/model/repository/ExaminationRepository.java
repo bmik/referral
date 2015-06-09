@@ -40,9 +40,69 @@ public class ExaminationRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
         }
 
         return examinationList;
+    }
+
+    public Examination getExaminationById(long id) {
+
+        Examination examination = null;
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        String sql = "SELECT * FROM examination WHERE id = ?";
+
+        try {
+            connection = manager.getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+
+            ResultSet results = statement.executeQuery();
+
+            if (results.first()) {
+                examination = new Examination();
+
+                examination.setId(id);
+                examination.setName(results.getString("name"));
+                examination.setCode(results.getString("code"));
+            }
+
+            if (results.next() != false) {
+                throw new RuntimeException("Too many results!");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return examination;
+
     }
 
 }

@@ -1,9 +1,13 @@
 package edu.uek.referral.model.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by bmik on 2015-06-02.
  */
-public class Examination {
+public class Examination implements Serializable {
+
+    private static final long serialVersionUID = 5899494286611401429L;
 
     private long id;
     private String code;
