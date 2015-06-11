@@ -33,9 +33,9 @@ public class ReferralRepository {
             statement.setLong(4, referral.getExamination().getId());
             statement.setString(5, referral.getStatus().toString());
 
-            statement.executeQuery();
+            statement.executeUpdate();
 
-        } catch (PSQLException psqlException) {
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -70,7 +70,7 @@ public class ReferralRepository {
 
             ResultSet results = statement.executeQuery();
 
-            if (results.first()) {
+            if (results.next()) {
                 referral = new Referral();
 
                 referral.setId(results.getLong("id"));
@@ -120,7 +120,7 @@ public class ReferralRepository {
 
             ResultSet results = statement.executeQuery();
 
-            if (results.first()) {
+            if (results.next()) {
                 referral = new Referral();
 
                 referral.setId(results.getLong("id"));
@@ -319,11 +319,15 @@ public class ReferralRepository {
             connection = manager.getConnection();
 
             statement = connection.prepareStatement(sql);
-            statement.setTimestamp(1, new Timestamp(examinationDate.getTime()));
+            if (examinationDate != null) {
+                statement.setTimestamp(1, new Timestamp(examinationDate.getTime()));
+            } else {
+                statement.setTimestamp(1, null);
+            }
             statement.setString(2, status.toString());
             statement.setLong(3, id);
 
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

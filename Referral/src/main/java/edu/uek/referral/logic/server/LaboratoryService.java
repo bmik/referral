@@ -111,12 +111,14 @@ public class LaboratoryService {
             if (ref == null) {
                 response.setStatus(ResponseStatus.INVALID);
                 response.setCause("No referral with given code: " + er.getReferralId());
+                return response;
             }
 
             if (ReferralStatus.WAITING.equals(ref.getStatus()) == false) {
                 response.setStatus(ResponseStatus.INVALID);
                 response.setCause(String.format("Unable to add examination results for referral with code %s. Wrong status: %s",
                         ref.getReferralCode(), ref.getStatus().toString()));
+                return response;
             }
 
             examinationResultRepository.addExaminationResult(

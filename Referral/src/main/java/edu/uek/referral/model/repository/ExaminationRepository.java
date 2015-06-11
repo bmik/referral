@@ -73,7 +73,7 @@ public class ExaminationRepository {
 
             ResultSet results = statement.executeQuery();
 
-            if (results.first()) {
+            if (results.next()) {
                 examination = new Examination();
 
                 examination.setId(id);

@@ -1,5 +1,6 @@
 package edu.uek.referral.rmi;
 
+import edu.uek.referral.logic.server.examination.ExaminationResolver;
 import edu.uek.referral.logic.util.PropertyHandler;
 
 import java.rmi.registry.LocateRegistry;
@@ -11,29 +12,8 @@ import java.rmi.registry.Registry;
 public class LaboratoryServer {
 
     public static void main(String[] args) {
-        /*LaboratoryService service = new LaboratoryService();
-
-        GetExaminationListRequest request = new GetExaminationListRequest();
-        request.setClientId(1234);
-
-        Examination exam = null;
-        GetExaminationListResponse response = service.getExaminationList(request);
-        exam = response.getExaminationList().get(4);
-
-        AddNewReferralRequest addNewReferralRequest = new AddNewReferralRequest();
-
-        Referral referral = new Referral();
-
-        referral.setExamination(exam);
-        referral.setReferralCode("123-123");
-        referral.setStatus(ReferralStatus.NEW);
-
-        addNewReferralRequest.setClientId(123);
-        addNewReferralRequest.setReferral(referral);
-
-        service.addNewReferral(addNewReferralRequest);*/
-
         registerRmiService();
+        startExaminationResolver();
 
     }
 
@@ -45,6 +25,11 @@ public class LaboratoryServer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void startExaminationResolver() {
+        ExaminationResolver examinationResolver = new ExaminationResolver();
+        examinationResolver.run();
     }
 
 }

@@ -33,7 +33,7 @@ public class ExaminationResultRepository {
             statement.setString(4, parameterUnit);
             statement.setString(5, comment);
 
-            statement.executeQuery();
+            statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,7 +70,7 @@ public class ExaminationResultRepository {
 
             ResultSet results = statement.executeQuery();
 
-            if (results.first()) {
+            if (results.next()) {
                 examinationResult = new ExaminationResult();
 
                 examinationResult.setId(results.getLong("id"));
